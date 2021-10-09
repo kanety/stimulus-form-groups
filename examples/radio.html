@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script type="importmap">
+    {
+      "imports": {
+        "@hotwired/stimulus": "/node_modules/@hotwired/stimulus/dist/stimulus.js",
+        "@kanety/stimulus-form-groups": "/dist/index.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import { Application, Controller } from '@hotwired/stimulus';
+    import FormGroupsController from '@kanety/stimulus-form-groups';
+    const application = Application.start();
+    application.register('form-groups', FormGroupsController);
+  </script>
+  <link rel="stylesheet" href="/dist/index.css"></link>
+</head>
+<body>
+  <h1>Radio button</h1>
+  <div data-controller="form-groups">
+    <label><input type="radio" name="group" value="group1" data-action="form-groups#toggle">group1</label>
+    <label><input type="radio" name="group" value="group2" data-action="form-groups#toggle">group2</label>
+    <label><input type="radio" name="group" value="group3" data-action="form-groups#toggle">group3</label>
+    <div style="display: none;" data-form-group-id="group1">
+      <p>group1 content</p>
+    </div>
+    <div style="display: none;" data-form-group-id="group2">
+      <p>group2 content</p>
+    </div>
+    <div style="display: none;" data-form-group-id="group3">
+      <p>group3 content</p>
+    </div>
+  </div>
+</body>
+</html>

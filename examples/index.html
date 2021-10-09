@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script type="importmap">
+    {
+      "imports": {
+        "@hotwired/stimulus": "/node_modules/@hotwired/stimulus/dist/stimulus.js",
+        "@kanety/stimulus-form-groups": "/dist/index.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import { Application, Controller } from '@hotwired/stimulus';
+    import FormGroupsController from '@kanety/stimulus-form-groups';
+    const application = Application.start();
+    application.register('form-groups', FormGroupsController);
+  </script>
+  <link rel="stylesheet" href="/dist/index.css"></link>
+</head>
+<body>
+  <h1>Select</h1>
+  <div data-controller="form-groups">
+    <select data-action="form-groups#toggle">
+      <option value=""></option>
+      <option value="group1">group1</option>
+      <option value="group2">group2</option>
+      <option value="group3">group3</option>
+    </select>
+    <div style="display: none;" data-form-group-id="group1">
+      <p>group1 content</p>
+      <p>group1 content</p>
+    </div>
+    <div style="display: none;" data-form-group-id="group2">
+      <p>group2 content</p>
+      <p>group2 content</p>
+    </div>
+    <div style="display: none;" data-form-group-id="group3">
+      <p>group3 content</p>
+      <p>group3 content</p>
+    </div>
+  </div>
+</body>
+</html>
