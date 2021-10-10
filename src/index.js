@@ -10,13 +10,15 @@ export default class extends Controller {
   }
 
   toggle(e) {
+    let method;
     if (this.modeValue == 'disabled') {
-      this.groups.forEach(group => this.toggleDisabled(group, true));
-      this.findGroups(e.target).forEach(group => this.toggleDisabled(group, false));
+      method = this.toggleDisabled.bind(this);
     } else {
-      this.groups.forEach(group => this.toggleVisible(group, false));
-      this.findGroups(e.target).forEach(group => this.toggleVisible(group, true));
+      method = this.toggleVisible.bind(this);
     }
+
+    this.groups.forEach(group => method(group, false));
+    this.findGroups(e.target).forEach(group => method(group, true));
   }
 
   toggleVisible(group, visible) {
@@ -24,8 +26,12 @@ export default class extends Controller {
     group.classList.toggle('st-form-groups--visible', visible);
   }
 
-  toggleDisabled(group, disabled) {
-    group.querySelectorAll('input, select, textarea, button').forEach(elem => elem.disabled = disabled);
+  toggleDisabled(group, enabled) {
+    this.inputElements(group).forEach(elem => elem.disabled = !enabled);
+  }
+
+  inputElements(group) {
+    return group.querySelectorAll('input, select, textarea, button')
   }
 
   findGroups(target) {
