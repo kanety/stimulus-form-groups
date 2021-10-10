@@ -24,12 +24,6 @@ const application = Application.start();
 application.register('form-groups', FormGroupsController);
 ```
 
-Import css:
-
-```css
-@import '@kanety/stimulus-form-groups';
-```
-
 Build html as follows:
 
 ```html
@@ -48,13 +42,6 @@ Build html as follows:
 </div>
 ```
 
-You can use css class for fade-in animation:
-
-```html
-<div class="st-form-groups" data-controller="form-groups">
-</div>
-```
-
 ### Options
 
 #### mode
@@ -64,16 +51,6 @@ You can toggle disabled status for input elements:
 ```html
 <div data-controller="form-groups"
      data-form-groups-mode-value="disabled">
-  <select action="form-groups#toggle">
-    <option value="group1">group1</option>
-    <option value="group2">group2</option>
-  </select>
-  <div data-form-group-id="group1">
-    <p>group1 content</p>
-  </div>
-  <div data-form-group-id="group2">
-    <p>group2 content</p>
-  </div>
 </div>
 ```
 

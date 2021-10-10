@@ -1,5 +1,4 @@
 import { Controller } from '@hotwired/stimulus';
-import './index.scss'
 
 export default class extends Controller {
   static values = {
@@ -20,13 +19,13 @@ export default class extends Controller {
     }
   }
 
-  toggleVisible(group, flag) {
-    group.style.display = flag ? '' : 'none';
-    group.classList.toggle('st-form-groups__group--visible', flag);
+  toggleVisible(group, visible) {
+    group.style.display = visible ? '' : 'none';
+    group.classList.toggle('st-form-groups--visible', visible);
   }
 
-  toggleDisabled(group, flag) {
-    group.querySelectorAll('input, select, textarea, button').forEach(elem => elem.disabled = flag);
+  toggleDisabled(group, disabled) {
+    group.querySelectorAll('input, select, textarea, button').forEach(elem => elem.disabled = disabled);
   }
 
   findGroups(target) {
