@@ -24,23 +24,48 @@ const application = Application.start();
 application.register('form-groups', FormGroupsController);
 ```
 
+Import css:
+
+```css
+@import '@kanety/stimulus-form-groups';
+```
+
 Build html as follows:
 
 ```html
 <div data-controller="form-groups">
-  <!-- you can use select, radio or checkbox for action trigger -->
+  <!-- you can use select, radio or checkbox as trigger element -->
   <select action="form-groups#toggle">
     <option value="group1">group1</option>
     <option value="group2">group2</option>
   </select>
-  <div style="display: none;" data-form-group-id="group1">
+  <div data-form-group-id="group1">
     <p>group1 content</p>
   </div>
-  <div style="display: none;" data-form-group-id="group2">
+  <div data-form-group-id="group2">
     <p>group2 content</p>
   </div>
 </div>
 ```
+
+You can also toggle multiple form groups at once:
+
+```html
+<div data-controller="form-groups">
+  <select action="form-groups#toggle">
+    <option value="group1">group1</option>
+    <option value="group2">group2</option>
+  </select>
+  <div data-form-group-id='["group1", "group2"]'>
+    <p>group1 content</p>
+  </div>
+  <div data-form-group-id="group2">
+    <p>group2 content</p>
+  </div>
+</div>
+```
+
+In this example, `group1 content` will be shown whichever options you select.
 
 ### Options
 

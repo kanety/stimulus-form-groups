@@ -9,14 +9,14 @@ describe('checkbox', () => {
     document.body.innerHTML = `
       <div data-controller="form-groups">
         <label><input type="checkbox" data-action="form-groups#toggle">group1</label>
-        <div style="display: none;" data-form-group-id="true">
+        <div data-form-group-id="true">
           <p>group1 content</p>
         </div>
       </div>
     `;
   });
 
-  it('toggles visibility', () => {
+  it('toggles display', () => {
     $('input[type=checkbox]').click();
     expect($('[data-form-group-id="true"]').style.display).toEqual('');
 

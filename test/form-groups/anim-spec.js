@@ -4,6 +4,8 @@ import FormGroupsController from 'index';
 const application = Application.start();
 application.register('form-groups', FormGroupsController);
 
+jest.useFakeTimers();
+
 describe('index', () => {
   beforeEach(() => {
     document.body.innerHTML = `
@@ -13,25 +15,23 @@ describe('index', () => {
           <option value="group1">group1</option>
           <option value="group2">group2</option>
         </select>
-        <div style="display: none;" data-form-group-id="group1">
+        <div data-form-group-id="group1">
           <p>group1 content</p>
         </div>
-        <div style="display: none;" data-form-group-id="group2">
+        <div data-form-group-id="group2">
           <p>group2 content</p>
         </div>
       </div>
     `;
   });
 
-  it('toggles visibility', () => {
+  it('toggles anim', () => {
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--disable-anim')).toEqual(true);
+    jest.runAllTimers();
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--disable-anim')).toEqual(false);
+
     $('option[value="group1"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
-    expect($('[data-form-group-id="group1"]').style.display).toEqual('');
-    expect($('[data-form-group-id="group2"]').style.display).toEqual('none');
-
-    $('option[value="group2"]').selected = true;
-    $('select').dispatchEvent(new Event('change'));
-    expect($('[data-form-group-id="group1"]').style.display).toEqual('none');
-    expect($('[data-form-group-id="group2"]').style.display).toEqual('');
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--fade-in')).toEqual(true);
   });
 });

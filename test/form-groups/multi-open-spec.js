@@ -14,17 +14,17 @@ describe('multi-open', () => {
           <option value="group2">group2</option>
           <option value="group3">group3</option>
         </select>
-        <div style="display: none;" data-form-group-id='["group1", "group3"]'>
+        <div data-form-group-id='["group1", "group3"]'>
           <p>group1 content</p>
         </div>
-        <div style="display: none;" data-form-group-id='["group2", "group3"]'>
+        <div data-form-group-id='["group2", "group3"]'>
           <p>group2 content</p>
         </div>
       </div>
     `;
   });
 
-  it('toggles visibility', () => {
+  it('toggles display', () => {
     $('option[value="group3"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
     expect($(`[data-form-group-id='["group1", "group3"]']`).style.display).toEqual('');

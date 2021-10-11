@@ -1,0 +1,15 @@
+@keyframes st-form-groups-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.st-form-groups--fade-in {
+  animation: st-form-groups-fade-in 0.25s;
+}
+.st-form-groups--disable-anim {
+  animation-duration: 0s !important;
+}

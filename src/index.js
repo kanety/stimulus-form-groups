@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import './index.scss';
 
 export default class extends Controller {
   static values = {
@@ -9,21 +10,43 @@ export default class extends Controller {
     return this.scope.findAllElements('[data-form-group-id]');
   }
 
-  toggle(e) {
-    let method;
-    if (this.modeValue == 'disabled') {
-      method = this.toggleDisabled.bind(this);
-    } else {
-      method = this.toggleVisible.bind(this);
-    }
+  get togglers() {
+    return this.context.bindingObserver.bindings
+               .filter(binding => binding.action.methodName == 'toggle')
+               .map(binding => binding.action.element);
+  }
 
+  connect() {
+    this.enableAnim(false);
+    this.togglers.forEach(toggler => this.toggleBy(toggler));
+    setTimeout(() => this.enableAnim(true), 200);
+  }
+
+  enableAnim(enabled) {
+    this.groups.forEach(group => group.classList.toggle('st-form-groups--disable-anim', !enabled));
+  }
+
+  toggle(e) {
+    this.toggleBy(e.target);
+  }
+
+  toggleBy(elem) {
+    let method = this.toggleMethod();
     this.groups.forEach(group => method(group, false));
-    this.findGroups(e.target).forEach(group => method(group, true));
+    this.findGroups(elem).forEach(group => method(group, true));
+  }
+
+  toggleMethod() {
+    if (this.modeValue == 'disabled') {
+      return this.toggleDisabled.bind(this);
+    } else {
+      return this.toggleVisible.bind(this);
+    }
   }
 
   toggleVisible(group, visible) {
     group.style.display = visible ? '' : 'none';
-    group.classList.toggle('st-form-groups--visible', visible);
+    group.classList.toggle('st-form-groups--fade-in', visible);
   }
 
   toggleDisabled(group, enabled) {
@@ -46,10 +69,11 @@ export default class extends Controller {
   getGroupID(target) {
     if (target.matches('select')) {
       return target.options[target.selectedIndex].value;
-    } else if (target.matches('input[type=radio]')) {
-      return target.value;
     } else if (target.matches('input[type=checkbox]')) {
       return target.checked;
+    } else if (target.matches('input[type=radio]')) {
+      let checked = this.scope.findElement(`input[type=radio][name="${target.name}"]:checked`);
+      return checked ? checked.value : null;
     }
   }
 

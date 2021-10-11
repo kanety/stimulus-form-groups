@@ -4,32 +4,33 @@ import FormGroupsController from 'index';
 const application = Application.start();
 application.register('form-groups', FormGroupsController);
 
-describe('radio', () => {
+describe('index', () => {
   beforeEach(() => {
     document.body.innerHTML = `
       <div data-controller="form-groups">
-        <label><input type="radio" name="group" value="group1" data-action="form-groups#toggle">group1</label>
-        <label><input type="radio" name="group" value="group2" data-action="form-groups#toggle">group2</label>
-        <label><input type="radio" name="group" value="group3" data-action="form-groups#toggle">group3</label>
+        <select data-action="form-groups#toggle">
+          <option value=""></option>
+          <option value="group1">group1</option>
+          <option value="group2">group2</option>
+        </select>
         <div data-form-group-id="group1">
           <p>group1 content</p>
         </div>
         <div data-form-group-id="group2">
           <p>group2 content</p>
         </div>
-        <div data-form-group-id="group3">
-          <p>group3 content</p>
-        </div>
       </div>
     `;
   });
 
   it('toggles display', () => {
-    $('input[value="group1"]').click();
+    $('option[value="group1"]').selected = true;
+    $('select').dispatchEvent(new Event('change'));
     expect($('[data-form-group-id="group1"]').style.display).toEqual('');
     expect($('[data-form-group-id="group2"]').style.display).toEqual('none');
 
-    $('input[value="group2"]').click();
+    $('option[value="group2"]').selected = true;
+    $('select').dispatchEvent(new Event('change'));
     expect($('[data-form-group-id="group1"]').style.display).toEqual('none');
     expect($('[data-form-group-id="group2"]').style.display).toEqual('');
   });

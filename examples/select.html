@@ -18,11 +18,25 @@
   </script>
 </head>
 <body>
-  <h1>Checkbox</h1>
+  <h1>Select</h1>
   <div data-controller="form-groups">
-    <label><input type="checkbox" data-action="form-groups#toggle">group1</label>
-    <div data-form-group-id="true">
+    <select data-action="form-groups#toggle">
+      <option value=""></option>
+      <option value="group1">group1</option>
+      <option value="group2">group2</option>
+      <option value="group3">group3</option>
+    </select>
+    <div data-form-group-id="group1">
       <p>group1 content</p>
+      <p>group1 content</p>
+    </div>
+    <div data-form-group-id="group2">
+      <p>group2 content</p>
+      <p>group2 content</p>
+    </div>
+    <div data-form-group-id="group3">
+      <p>group3 content</p>
+      <p>group3 content</p>
     </div>
   </div>
 </body>

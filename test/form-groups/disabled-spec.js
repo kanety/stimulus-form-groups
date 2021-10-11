@@ -16,10 +16,10 @@ describe('checkbox', () => {
           <option value="group2">group2</option>
         </select>
         <div data-form-group-id="group1">
-          <p><input type="text" disabled></p>
+          <p><input type="text"></p>
         </div>
         <div data-form-group-id="group2">
-          <p><textarea disabled></textarea></p>
+          <p><textarea></textarea></p>
         </div>
       </div>
     `;
