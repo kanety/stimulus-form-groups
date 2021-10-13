@@ -23,7 +23,13 @@ export default class extends Controller {
   }
 
   enableAnim(enabled) {
-    this.groups.forEach(group => group.classList.toggle('st-form-groups--disable-anim', !enabled));
+    this.groups.forEach(group => {
+      if (enabled) {
+        group.classList.remove('st-form-groups--disable-anim')
+      } else {
+        group.classList.add('st-form-groups--disable-anim')
+      }
+    });
   }
 
   toggle(e) {
@@ -45,8 +51,13 @@ export default class extends Controller {
   }
 
   toggleVisible(group, visible) {
-    group.style.display = visible ? '' : 'none';
-    group.classList.toggle('st-form-groups--fade-in', visible);
+    if (visible) {
+      group.style.display = '';
+      group.classList.add('st-form-groups--fade-in');
+    } else {
+      group.style.display = 'none';
+      group.classList.remove('st-form-groups--fade-in');
+    }
   }
 
   toggleDisabled(group, enabled) {
