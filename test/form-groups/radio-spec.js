@@ -1,9 +1,3 @@
-import { Application } from '@hotwired/stimulus';
-import FormGroupsController from 'index';
-
-const application = Application.start();
-application.register('form-groups', FormGroupsController);
-
 describe('radio', () => {
   beforeEach(() => {
     document.body.innerHTML = `

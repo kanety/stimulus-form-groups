@@ -1,10 +1,4 @@
-import { Application } from '@hotwired/stimulus';
-import FormGroupsController from 'index';
-
-const application = Application.start();
-application.register('form-groups', FormGroupsController);
-
-describe('checkbox', () => {
+describe('disabled', () => {
   beforeEach(() => {
     document.body.innerHTML = `
       <div data-controller="form-groups"
