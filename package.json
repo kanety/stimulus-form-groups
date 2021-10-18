@@ -1,7 +1,7 @@
 {
   "name": "@kanety/stimulus-form-groups",
   "description": "A stimulus controller for toggle of form groups",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "source": "src/index.js",
   "main": "./dist/index.js",
   "umd:main": "./dist/index.umd.js",
