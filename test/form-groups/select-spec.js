@@ -20,12 +20,12 @@ describe('select', () => {
   it('toggles display', () => {
     $('option[value="group1"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
-    expect($('[data-form-group-id="group1"]').style.display).toEqual('');
-    expect($('[data-form-group-id="group2"]').style.display).toEqual('none');
+    expect($('[data-form-group-id="group1"]').style.visibility).toEqual('');
+    expect($('[data-form-group-id="group2"]').style.visibility).toEqual('hidden');
 
     $('option[value="group2"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
-    expect($('[data-form-group-id="group1"]').style.display).toEqual('none');
-    expect($('[data-form-group-id="group2"]').style.display).toEqual('');
+    expect($('[data-form-group-id="group1"]').style.visibility).toEqual('hidden');
+    expect($('[data-form-group-id="group2"]').style.visibility).toEqual('');
   });
 });

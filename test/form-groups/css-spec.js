@@ -20,12 +20,12 @@ describe('anim', () => {
   });
 
   it('toggles anim', () => {
-    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--disable-anim')).toEqual(true);
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--disable-trans')).toEqual(true);
     jest.runAllTimers();
-    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--disable-anim')).toEqual(false);
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--disable-trans')).toEqual(false);
 
     $('option[value="group1"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
-    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--fade-in')).toEqual(true);
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups__group--visible')).toEqual(true);
   });
 });

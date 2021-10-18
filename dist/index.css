@@ -1,2 +1,2 @@
-@-webkit-keyframes st-form-groups-fade-in{0%{opacity:0}to{opacity:1}}@keyframes st-form-groups-fade-in{0%{opacity:0}to{opacity:1}}.st-form-groups--fade-in{-webkit-animation:st-form-groups-fade-in .25s;animation:st-form-groups-fade-in .25s}.st-form-groups--disable-anim{-webkit-animation-duration:0s!important;animation-duration:0s!important}
+.st-form-groups .st-form-groups__group:not(.st-form-groups__group--visible){opacity:0;overflow:hidden;transition:all .2s;visibility:hidden}.st-form-groups .st-form-groups__group.st-form-groups__group--visible{opacity:1;overflow:hidden;transition:all .2s;visibility:visible}.st-form-groups .st-form-groups--disable-trans{transition:none!important}
 /*# sourceMappingURL=index.css.map */

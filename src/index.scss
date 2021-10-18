@@ -1,15 +1,18 @@
-@keyframes st-form-groups-fade-in {
-  0% {
+.st-form-groups {
+  .st-form-groups__group:not(.st-form-groups__group--visible) {
     opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all .2s;
   }
-  100% {
+  .st-form-groups__group.st-form-groups__group--visible {
     opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    transition: all .2s;
   }
-}
 
-.st-form-groups--fade-in {
-  animation: st-form-groups-fade-in 0.25s;
-}
-.st-form-groups--disable-anim {
-  animation-duration: 0s !important;
+  .st-form-groups--disable-trans {
+    transition: none !important;
+  }
 }

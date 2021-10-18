@@ -20,11 +20,11 @@ describe('radio', () => {
 
   it('toggles display', () => {
     $('input[value="group1"]').click();
-    expect($('[data-form-group-id="group1"]').style.display).toEqual('');
-    expect($('[data-form-group-id="group2"]').style.display).toEqual('none');
+    expect($('[data-form-group-id="group1"]').style.visibility).toEqual('');
+    expect($('[data-form-group-id="group2"]').style.visibility).toEqual('hidden');
 
     $('input[value="group2"]').click();
-    expect($('[data-form-group-id="group1"]').style.display).toEqual('none');
-    expect($('[data-form-group-id="group2"]').style.display).toEqual('');
+    expect($('[data-form-group-id="group1"]').style.visibility).toEqual('hidden');
+    expect($('[data-form-group-id="group2"]').style.visibility).toEqual('');
   });
 });
