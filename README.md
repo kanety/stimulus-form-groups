@@ -48,7 +48,7 @@ Build html as follows:
 </div>
 ```
 
-You can also toggle multiple form groups at once:
+You can also toggle multiple groups at once:
 
 ```html
 <div data-controller="form-groups">
@@ -66,6 +66,21 @@ You can also toggle multiple form groups at once:
 ```
 
 In this example, `group1 content` will be shown whichever options you select.
+
+You can also use multiple input elements by setting combination of name and value as group id:
+
+```html
+<div data-controller="form-groups">
+  <input type="checkbox" name="cb1" value="true" action="form-groups#toggle">
+  <input type="checkbox" name="cb2" value="true" action="form-groups#toggle">
+  <div data-form-group-id="cb1:true"><!-- name:value format -->
+    <p>group1 content</p>
+  </div>
+  <div data-form-group-id="cb2:true">
+    <p>group2 content</p>
+  </div>
+</div>
+```
 
 ### Options
 
