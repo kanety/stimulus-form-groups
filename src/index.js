@@ -18,6 +18,7 @@ export default class extends Controller {
 
   connect() {
     this.enableAnim(false);
+    this.groups.forEach(group => this.toggleGroup(group, false));
     this.togglers.forEach(toggler => this.toggleBy(toggler));
     setTimeout(() => this.enableAnim(true), 200);
   }
@@ -33,20 +34,19 @@ export default class extends Controller {
   }
 
   toggle(e) {
-    this.toggleBy(e.target);
+    this.groups.forEach(group => this.toggleGroup(group, false));
+    this.togglers.forEach(toggler => this.toggleBy(toggler));
   }
 
   toggleBy(elem) {
-    let method = this.toggleMethod();
-    this.groups.forEach(group => method(group, false));
-    this.findGroups(elem).forEach(group => method(group, true));
+    this.findGroups(elem).forEach(group => this.toggleGroup(group, true));
   }
 
-  toggleMethod() {
+  toggleGroup(group, flag) {
     if (this.modeValue == 'disabled') {
-      return this.toggleDisabled.bind(this);
+      return this.toggleDisabled(group, flag);
     } else {
-      return this.toggleVisible.bind(this);
+      return this.toggleVisible(group, flag);
     }
   }
 
@@ -73,30 +73,53 @@ export default class extends Controller {
   }
 
   findGroups(target) {
-    let id = this.getGroupID(target);
-    if (!id) {
+    let value = this.getValue(target);
+    if (!value) {
       return [];
     } else {
-      return this.groups.filter(group => this.parseJSON(group.getAttribute('data-form-group-id')).includes(id));
+      return this.groups.filter(group => this.isMatch(group, target.name, value));
     }
   }
 
-  getGroupID(target) {
+  isMatch(group, targetName, targetValue) {
+    return this.extractIDs(group.getAttribute('data-form-group-id')).some(id => {
+      let [name, value] = this.extractNameValue(id);
+      return (!name || name == targetName) && value == targetValue
+    });
+  }
+
+  getValue(target) {
     if (target.matches('select')) {
       return target.options[target.selectedIndex].value;
     } else if (target.matches('input[type=checkbox]')) {
-      return target.checked;
+      return target.checked ? target.value : null;
     } else if (target.matches('input[type=radio]')) {
       let checked = this.scope.findElement(`input[type=radio][name="${target.name}"]:checked`);
       return checked ? checked.value : null;
     }
   }
 
-  parseJSON(ids) {
+  extractIDs(str) {
+    if (str.startsWith('[')) {
+      return [].concat(this.parseJSON(str));
+    } else {
+      return [].concat(str);
+    }
+  }
+
+  extractNameValue(id) {
+    if (id.includes(':')) {
+      return id.split(':', 2)
+    } else {
+      return [null, id];
+    }
+  }
+
+  parseJSON(str) {
     try {
-      return [].concat(JSON.parse(ids));
-    } catch(e) {
-      return [].concat(ids);
+      return JSON.parse(str);
+    } catch(error) {
+      return str;
     }
   }
 }

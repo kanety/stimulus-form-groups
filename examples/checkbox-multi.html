@@ -20,9 +20,13 @@
 <body>
   <h1>Checkbox</h1>
   <div data-controller="form-groups">
-    <label><input type="checkbox" name="cb" value="true" data-action="form-groups#toggle">group1</label>
-    <div data-form-group-id="true">
+    <label><input type="checkbox" name="cb1" value="1" data-action="form-groups#toggle">group1</label>
+    <label><input type="checkbox" name="cb2" value="1" data-action="form-groups#toggle">group2</label>
+    <div data-form-group-id="cb1:1">
       <p>group1 content</p>
+    </div>
+    <div data-form-group-id="cb2:1">
+      <p>group2 content</p>
     </div>
   </div>
 </body>

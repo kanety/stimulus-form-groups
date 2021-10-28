@@ -2,7 +2,7 @@ describe('checkbox', () => {
   beforeEach(() => {
     document.body.innerHTML = `
       <div data-controller="form-groups">
-        <label><input type="checkbox" data-action="form-groups#toggle">group1</label>
+        <label><input type="checkbox" value="true" data-action="form-groups#toggle">group1</label>
         <div data-form-group-id="true">
           <p>group1 content</p>
         </div>
