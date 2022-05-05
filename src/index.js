@@ -17,20 +17,18 @@ export default class extends Controller {
   }
 
   connect() {
-    this.enableAnim(false);
+    this.enableTrans(false);
     this.groups.forEach(group => this.toggleGroup(group, false));
     this.togglers.forEach(toggler => this.toggleBy(toggler));
-    setTimeout(() => this.enableAnim(true), 200);
+    setTimeout(() => this.enableTrans(true), 200);
   }
 
-  enableAnim(enabled) {
-    this.groups.forEach(group => {
-      if (enabled) {
-        group.classList.remove('st-form-groups--disable-trans')
-      } else {
-        group.classList.add('st-form-groups--disable-trans')
-      }
-    });
+  enableTrans(enabled) {
+    if (enabled) {
+      this.element.classList.remove('st-form-groups--disable-trans')
+    } else {
+      this.element.classList.add('st-form-groups--disable-trans')
+    }
   }
 
   toggle(e) {

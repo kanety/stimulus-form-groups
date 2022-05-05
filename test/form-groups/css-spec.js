@@ -20,9 +20,9 @@ describe('anim', () => {
   });
 
   it('toggles anim', () => {
-    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--disable-trans')).toEqual(true);
+    expect($('[data-controller="form-groups"]').matches('.st-form-groups--disable-trans')).toEqual(true);
     jest.runAllTimers();
-    expect($('[data-form-group-id="group1"]').matches('.st-form-groups--disable-trans')).toEqual(false);
+    expect($('[data-controller="form-groups"]').matches('.st-form-groups--disable-trans')).toEqual(false);
 
     $('option[value="group1"]').selected = true;
     $('select').dispatchEvent(new Event('change'));

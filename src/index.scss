@@ -11,8 +11,9 @@
     overflow: hidden;
     transition: all .2s;
   }
-
-  .st-form-groups--disable-trans {
+}
+.st-form-groups--disable-trans {
+  .st-form-groups__group {
     transition: none !important;
   }
 }
