@@ -65,42 +65,53 @@ export default class extends Controller {
     return group.querySelectorAll('input, select, textarea, button')
   }
 
-  findGroups(target) {
-    let value = this.getValue(target);
+  findGroups(toggler) {
+    let value = this.getValue(toggler);
     if (!value) {
       return [];
     } else {
-      return this.groups.filter(group => this.isMatch(group, target.name, value));
+      return this.groups.filter(group => this.isMatch(group, toggler.name, value));
     }
   }
 
-  isMatch(group, targetName, targetValue) {
-    return this.extractIDs(group.getAttribute('data-form-group-id')).some(id => {
-      let [name, value] = this.extractNameValue(id);
-      return (!name || name == targetName) && value == targetValue
-    });
-  }
-
-  getValue(target) {
-    if (target.matches('select')) {
-      return target.options[target.selectedIndex].value;
-    } else if (target.matches('input[type=checkbox]')) {
-      return target.checked ? target.value : null;
-    } else if (target.matches('input[type=radio]')) {
-      let checked = this.scope.findElement(`input[type=radio][name="${target.name}"]:checked`);
+  getValue(toggler) {
+    if (toggler.matches('select')) {
+      return toggler.options[toggler.selectedIndex].value;
+    } else if (toggler.matches('input[type=checkbox]')) {
+      return toggler.checked ? toggler.value : null;
+    } else if (toggler.matches('input[type=radio]')) {
+      let checked = this.scope.findElement(`input[type=radio][name="${toggler.name}"]:checked`);
       return checked ? checked.value : null;
     }
   }
 
-  extractIDs(str) {
-    if (str.startsWith('[')) {
-      return [].concat(this.parseJSON(str));
+  isMatch(group, togglerName, togglerValue) {
+    let set = new GroupIDSet(group.getAttribute('data-form-group-id'));
+    return set.nameValues.some(([name, value]) => {
+      return (!name || name == togglerName) && value == togglerValue
+    });
+  }
+}
+
+class GroupIDSet {
+  constructor(idset) {
+    this.idset = idset;
+    this.ids = this.parse(idset);
+  }
+
+  get nameValues() {
+    return this.ids.map(id => this.parseID(id));
+  }
+
+  parse(idset) {
+    if (idset.startsWith('[')) {
+      return [].concat(this.parseJSON(idset));
     } else {
-      return [].concat(str);
+      return [].concat(idset);
     }
   }
 
-  extractNameValue(id) {
+  parseID(id) {
     if (id.includes(':')) {
       return id.split(':', 2)
     } else {
