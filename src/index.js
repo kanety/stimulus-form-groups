@@ -17,44 +17,80 @@ export default class extends Controller {
   }
 
   connect() {
-    this.enableTrans(false);
-    this.toggleGroups();
-    setTimeout(() => this.enableTrans(true), 200);
-  }
-
-  enableTrans(enabled) {
-    if (enabled) {
-      this.element.classList.remove('st-form-groups--disable-trans')
-    } else {
-      this.element.classList.add('st-form-groups--disable-trans')
-    }
+    this.toggleGroups(false);
   }
 
   toggle(e) {
-    this.toggleGroups();
+    this.toggleGroups()
   }
 
-  toggleGroups() {
-    let targetGroups = this.togglers.flatMap(toggler => this.findGroups(toggler));
-    this.groups.forEach(group => this.toggleGroup(group, targetGroups.includes(group)));
+  toggleGroups(transition = true) {
+    let onGroups = this.togglers.flatMap(toggler => this.findGroups(toggler));
+    this.groups.forEach(group => {
+      if (onGroups.includes(group)) {
+        this.on(group, transition);
+      } else {
+        this.off(group, transition);
+      }
+    });
   }
 
-  toggleGroup(group, flag) {
+  on(group, transition = true) {
     if (this.modeValue == 'disabled') {
-      return this.toggleDisabled(group, flag);
+      this.enable(group);
     } else {
-      return this.toggleVisible(group, flag);
+      this.show(group, transition);
     }
   }
 
-  toggleVisible(group, visible) {
-    if (visible) {
-      group.style.height = group.scrollHeight + 'px';
-      group.classList.add('st-form-groups__group--visible');
+  off(group, transition = true) {
+    if (this.modeValue == 'disabled') {
+      this.disable(group);
     } else {
-      group.style.height = '0px';
-      group.classList.remove('st-form-groups__group--visible');
+      this.hide(group, transition);
     }
+  }
+
+  show(group, transition = true) {
+    if (group.classList.contains('st-form-groups__group--visible')) return;
+
+    if (transition) {
+      group.style.height = '0px';
+      group.removeEventListener('transitionend', this.transitionEnd);
+      group.addEventListener('transitionend', this.transitionEnd);
+      setTimeout(() => {
+        group.style.height = group.scrollHeight + 'px';
+      });
+    }
+
+    group.classList.add('st-form-groups__group--visible');
+  }
+
+  hide(group, transition = true) {
+    if (!group.classList.contains('st-form-groups__group--visible')) return;
+
+    if (transition) {
+      group.style.height = group.scrollHeight + 'px';
+      group.removeEventListener('transitionend', this.transitionEnd);
+      group.addEventListener('transitionend', this.transitionEnd);
+      setTimeout(() => {
+        group.style.height = '0px';
+      });
+    }
+
+    group.classList.remove('st-form-groups__group--visible');
+  }
+
+  transitionEnd(e) {
+    e.target.style.height = '';
+  }
+
+  enable(group) {
+    this.toggleDisabled(group, true);
+  }
+
+  disable(group) {
+    this.toggleDisabled(group, false);
   }
 
   toggleDisabled(group, enabled) {

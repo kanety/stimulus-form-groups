@@ -1,2 +1,2 @@
-.st-form-groups .st-form-groups__group:not(.st-form-groups__group--visible){opacity:0;overflow:hidden;transition:all .2s;visibility:hidden}.st-form-groups .st-form-groups__group.st-form-groups__group--visible{opacity:1;overflow:hidden;transition:all .2s;visibility:visible}.st-form-groups--disable-trans .st-form-groups__group{transition:none!important}
+.st-form-groups .st-form-groups__group:not(.st-form-groups__group--visible){height:0;opacity:0;overflow:hidden;transition:all .2s;visibility:hidden}.st-form-groups .st-form-groups__group.st-form-groups__group--visible{opacity:1;overflow:hidden;transition:all .2s;visibility:visible}
 /*# sourceMappingURL=index.css.map */

@@ -1,5 +1,6 @@
 .st-form-groups {
   .st-form-groups__group:not(.st-form-groups__group--visible) {
+    height: 0;
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
@@ -10,10 +11,5 @@
     visibility: visible;
     overflow: hidden;
     transition: all .2s;
-  }
-}
-.st-form-groups--disable-trans {
-  .st-form-groups__group {
-    transition: none !important;
   }
 }

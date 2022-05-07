@@ -19,13 +19,17 @@ describe('transition', () => {
     `;
   });
 
-  it('toggles anim', () => {
-    expect($('[data-controller="form-groups"]').matches('.st-form-groups--disable-trans')).toEqual(true);
-    jest.runAllTimers();
-    expect($('[data-controller="form-groups"]').matches('.st-form-groups--disable-trans')).toEqual(false);
-
+  it('toggles transition', () => {
     $('option[value="group1"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
+    jest.runAllTimers();
+    $('[data-form-group-id="group1"]').dispatchEvent(new Event('transitionend'));
     expect($('[data-form-group-id="group1"]').matches('.st-form-groups__group--visible')).toEqual(true);
+
+    $('option[value="group1"]').selected = false;
+    $('select').dispatchEvent(new Event('change'));
+    jest.runAllTimers();
+    $('[data-form-group-id="group1"]').dispatchEvent(new Event('transitionend'));
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups__group--visible')).toEqual(false);
   });
 });
