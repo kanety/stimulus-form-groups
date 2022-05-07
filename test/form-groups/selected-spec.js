@@ -1,12 +1,10 @@
-jest.useFakeTimers();
-
-describe('anim', () => {
+describe('selected', () => {
   beforeEach(() => {
     document.body.innerHTML = `
       <div data-controller="form-groups">
         <select data-action="form-groups#toggle">
           <option value=""></option>
-          <option value="group1">group1</option>
+          <option value="group1" selected>group1</option>
           <option value="group2">group2</option>
         </select>
         <div data-form-group-id="group1">
@@ -19,13 +17,8 @@ describe('anim', () => {
     `;
   });
 
-  it('toggles anim', () => {
-    expect($('[data-controller="form-groups"]').matches('.st-form-groups--disable-trans')).toEqual(true);
-    jest.runAllTimers();
-    expect($('[data-controller="form-groups"]').matches('.st-form-groups--disable-trans')).toEqual(false);
-
-    $('option[value="group1"]').selected = true;
-    $('select').dispatchEvent(new Event('change'));
+  it('toggles display', () => {
     expect($('[data-form-group-id="group1"]').matches('.st-form-groups__group--visible')).toEqual(true);
+    expect($('[data-form-group-id="group2"]').matches('.st-form-groups__group--visible')).toEqual(false);
   });
 });

@@ -17,12 +17,13 @@
     const application = Application.start();
     application.register('form-groups', FormGroupsController);
   </script>
+  <link rel="stylesheet" href="../dist/index.css"></link>
 </head>
 <body>
   <h1>Checkbox</h1>
-  <div data-controller="form-groups">
+  <div class="st-form-groups" data-controller="form-groups">
     <label><input type="checkbox" name="cb" value="true" data-action="form-groups#toggle">group1</label>
-    <div data-form-group-id="true">
+    <div class="st-form-groups__group" data-form-group-id="true">
       <p>group1 content</p>
     </div>
   </div>
