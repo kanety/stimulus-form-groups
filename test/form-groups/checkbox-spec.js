@@ -12,9 +12,9 @@ describe('checkbox', () => {
 
   it('toggles display', () => {
     $('input[type=checkbox]').click();
-    expect($('[data-form-group-id="true"]').style.visibility).toEqual('');
+    expect($('[data-form-group-id="true"]').matches('.st-form-groups__group--visible')).toEqual(true);
 
     $('input[type=checkbox]').click();
-    expect($('[data-form-group-id="true"]').style.visibility).toEqual('hidden');
+    expect($('[data-form-group-id="true"]').matches('.st-form-groups__group--visible')).toEqual(false);
   });
 });

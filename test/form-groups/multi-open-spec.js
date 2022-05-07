@@ -21,12 +21,12 @@ describe('multi-open', () => {
   it('toggles display', () => {
     $('option[value="group3"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
-    expect($(`[data-form-group-id='["group1", "group3"]']`).style.visibility).toEqual('');
-    expect($(`[data-form-group-id='["group2", "group3"]']`).style.visibility).toEqual('');
+    expect($(`[data-form-group-id='["group1", "group3"]']`).matches('.st-form-groups__group--visible')).toEqual(true);
+    expect($(`[data-form-group-id='["group2", "group3"]']`).matches('.st-form-groups__group--visible')).toEqual(true);
 
     $('option[value=""]').selected = true;
     $('select').dispatchEvent(new Event('change'));
-    expect($(`[data-form-group-id='["group1", "group3"]']`).style.visibility).toEqual('hidden');
-    expect($(`[data-form-group-id='["group2", "group3"]']`).style.visibility).toEqual('hidden');
+    expect($(`[data-form-group-id='["group1", "group3"]']`).matches('.st-form-groups__group--visible')).toEqual(false);
+    expect($(`[data-form-group-id='["group2", "group3"]']`).matches('.st-form-groups__group--visible')).toEqual(false);
   });
 });

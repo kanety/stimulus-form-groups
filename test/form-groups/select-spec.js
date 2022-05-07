@@ -20,12 +20,12 @@ describe('select', () => {
   it('toggles display', () => {
     $('option[value="group1"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
-    expect($('[data-form-group-id="group1"]').style.visibility).toEqual('');
-    expect($('[data-form-group-id="group2"]').style.visibility).toEqual('hidden');
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups__group--visible')).toEqual(true);
+    expect($('[data-form-group-id="group2"]').matches('.st-form-groups__group--visible')).toEqual(false);
 
     $('option[value="group2"]').selected = true;
     $('select').dispatchEvent(new Event('change'));
-    expect($('[data-form-group-id="group1"]').style.visibility).toEqual('hidden');
-    expect($('[data-form-group-id="group2"]').style.visibility).toEqual('');
+    expect($('[data-form-group-id="group1"]').matches('.st-form-groups__group--visible')).toEqual(false);
+    expect($('[data-form-group-id="group2"]').matches('.st-form-groups__group--visible')).toEqual(true);
   });
 });

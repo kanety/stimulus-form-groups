@@ -18,8 +18,7 @@ export default class extends Controller {
 
   connect() {
     this.enableTrans(false);
-    this.groups.forEach(group => this.toggleGroup(group, false));
-    this.togglers.forEach(toggler => this.toggleBy(toggler));
+    this.toggleGroups();
     setTimeout(() => this.enableTrans(true), 200);
   }
 
@@ -32,12 +31,12 @@ export default class extends Controller {
   }
 
   toggle(e) {
-    this.groups.forEach(group => this.toggleGroup(group, false));
-    this.togglers.forEach(toggler => this.toggleBy(toggler));
+    this.toggleGroups();
   }
 
-  toggleBy(elem) {
-    this.findGroups(elem).forEach(group => this.toggleGroup(group, true));
+  toggleGroups() {
+    let targetGroups = this.togglers.flatMap(toggler => this.findGroups(toggler));
+    this.groups.forEach(group => this.toggleGroup(group, targetGroups.includes(group)));
   }
 
   toggleGroup(group, flag) {
@@ -50,13 +49,9 @@ export default class extends Controller {
 
   toggleVisible(group, visible) {
     if (visible) {
-      group.style.visibility = '';
-      group.style.overflow = '';
       group.style.height = group.scrollHeight + 'px';
       group.classList.add('st-form-groups__group--visible');
     } else {
-      group.style.visibility = 'hidden';
-      group.style.overflow = 'hidden';
       group.style.height = '0px';
       group.classList.remove('st-form-groups__group--visible');
     }
