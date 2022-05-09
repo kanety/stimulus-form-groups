@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0
+
+* Clear height of element after transition.
+
 ## 1.1.0
 
 * Support multiple input elements.
