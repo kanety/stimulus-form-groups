@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.3.0
+
+* Move dependencies to peerDependencies.
+* Change file extension to `.mjs` for module.
+
 ## 1.2.0
 
 * Clear height of element after transition.
